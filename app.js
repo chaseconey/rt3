@@ -8,7 +8,6 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , mongo = require( 'mongodb')
-  , fs = require('fs')
   , https = require('https')
   , path = require('path');
 
@@ -38,7 +37,7 @@ var twitter_options = {
   path: "/1.1/statuses/filter.json?track=bieber",
   method: "GET",
   headers: {
-    "Authorization": "Basic " + new Buffer("Da_Dataz:dadata123321").toString("base64")
+    "Authorization": "Basic " + new Buffer("nicetryguyyyyyyy").toString("base64")
   }
 };
 

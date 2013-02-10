@@ -3,3 +3,6 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+ul#tweets
+  each tweet in tweets
+    li #{name} #{user.email}
