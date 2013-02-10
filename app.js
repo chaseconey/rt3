@@ -30,17 +30,12 @@ db.open(function(err) {
 });
 
 /**
- * Setup twitter request options
+ * Get twitter config
  */
-var twitter_options = {
-  host: "stream.twitter.com",
-  path: "/1.1/statuses/filter.json?track=bieber",
-  method: "GET",
-  headers: {
-    "Authorization": "Basic " + new Buffer("nicetryguyyyyyyy").toString("base64")
-  }
-};
+var twitter_options = require('./configs/twitter_options');
 
+
+console.log(twitter_options);
 /**
  * Make the request and do something with the response
  */
