@@ -1,4 +1,5 @@
-rt3 - Real Time Tweet Tracking
+*rt3 - Real Time Tweet Tracking*
+==============================
 
 WHAT DOES IT DO?
 ================
@@ -14,32 +15,31 @@ WHAT TECHNOLOGY IS USED HERE?
 
 Backend:
 --------
-MongoDB - Backend DB
-Express - Backend Framework
+* MongoDB - Backend DB
+* Express - Backend Framework
 
 Frontend
 --------
-Jade - Templating Engine
-jQuery - JavaScript library
+* Jade - Templating Engine
+* jQuery - JavaScript library
 
 Other
 -----
-Socket.io - Real Time Data w/ Web Sockets
-Twitter Streaming API
+* Socket.io - Real Time Data w/ Web Sockets
+* Twitter Streaming API
 
 HOW DOES I RUN IT?
 ==================
 
 1. Download the app
 2. cd rt3 && npm install
-3. Rename /configs/twitter_options.js to my_twitter_options.js and fill in your own twitter credentials and change the track=bieber to whatever keyword you would like to collect
+3. Rename /configs/*twitter_options.js* to *my_twitter_options.js* and fill in your own twitter credentials and change the track=bieber to whatever keyword you would like to collect
 4. Start mongodb locally
-    mongod
+    <pre>mongod</pre>
 5. Start the node server
-    npm start
+    <pre>npm start</pre>
 or
-    node app.js
-
+    <pre>node app.js</pre>
 6. Load page at localhost:3000 (or whatever port you chose)
 
 TO DO:
