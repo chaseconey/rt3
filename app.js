@@ -59,7 +59,7 @@ var twit = new twitter({
   access_token_secret: twitter_config.access_token_secret
 });
 
-twit.stream('statuses/filter', { track: 'bieber' }, function(stream) {
+twit.stream('statuses/filter', { track: twitter_config.track }, function(stream) {
   stream.on('data', function (tweet) {
     /**
      * Send our tweet to the loaded page
@@ -70,7 +70,7 @@ twit.stream('statuses/filter', { track: 'bieber' }, function(stream) {
       tweet_text: tweet.text,
       profile_url: tweet.user.profile_image_url
     });
-
+    
     db.insert(tweet, function() {
       //
     });

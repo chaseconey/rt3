@@ -35,7 +35,7 @@ HOW DO I RUN IT?
     
     <pre>cd rt3 && npm install</pre>
 
-3. Rename /configs/twitter_options.js to my_twitter_options.js and fill in your own twitter credentials and change the track=bieber to whatever keyword you would like to collect
+3. Rename /configs/twitter_config.js to my_twitter_config.js and fill in your own twitter credentials.
 4. Start mongodb locally
 
     <pre>mongod</pre>
@@ -53,7 +53,6 @@ TO DO:
 2. General clean up
 3. Need to use some templates for the front end (maybe Mustache??)
 4. Create data mining part of the app
-5. Use ntwitter package instead of manual https request (allows for easy OAuth)
 
 MIT License
 -----------

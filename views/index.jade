@@ -17,21 +17,25 @@ block content
 
     script(src='/socket.io/socket.io.js')
     script
-        var ul = $("#tweets");
-        var socket = io.connect('http://localhost');
-        var counter = $("div#counter").find("span#numTweets");
+        var ul = $("ul#tweets"),
+            socket = io.connect('http://localhost'),
+            counter = $("div#counter").find("span#numTweets"),
+            initCounter = $("div#counter").find("span#numTweets").html(),
+            currentList;
+
         jQuery(function ($) {
             socket.on('tweet', function (tweet) {
-                counterInt = parseInt(counter.html(), 10);
-                counter.html(counterInt+1)
+                initCounter++;
+                counter.html(initCounter)
                 tweetHtml = "<li class='cf'><img src='" + tweet.profile_url + "'/><p>" + tweet.user_name + " - " + tweet.tweet_text + "</p></li>";
                 ul.prepend(tweetHtml);
+
+                if (initCounter > 8) ul.children("li").last().remove();
             });
         });
         $("#connect").on("click", function(e) {
             socket.socket.reconnect()
         });
         $("#disconnect").on("click", function(e) {
-            e.preventDefault();
             socket.disconnect();
         });
