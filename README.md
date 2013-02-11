@@ -28,7 +28,7 @@ Other
 * Socket.io - Real Time Data w/ Web Sockets
 * Twitter Streaming API
 
-HOW DOES I RUN IT?
+HOW DO I RUN IT?
 ==================
 
 1. Download the app
