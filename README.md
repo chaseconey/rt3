@@ -1,10 +1,10 @@
-*rt3 - Real Time Tweet Tracking*
+**rt3 - Real Time Tweet Tracking**
 ==============================
 
 WHAT DOES IT DO?
 ================
 
-This is a simple application that grabs tweets from the [Twitter Streaming API] (https://dev.twitter.com/docs/streaming-apis) using a keyword that you specify and then stores the information in a database for later data mining.
+This is a simple application that grabs tweets from the [Twitter Streaming API](https://dev.twitter.com/docs/streaming-apis) using a keyword that you specify and then stores the information in a database for later data mining.
 
 As you connect to the root route, the 10 latest tweets will be loaded onto the page. Once your browser has connected to the backend web socket, it will then also update with the latest tweets of that keyword.
 
@@ -15,18 +15,18 @@ WHAT TECHNOLOGY IS USED HERE?
 
 Backend:
 --------
-* MongoDB - Backend DB
-* Express - Backend Framework
+* [MongoDB](http://www.mongodb.org/) - Backend DB
+* [Express](http://expressjs.com/) - Backend Framework
 
 Frontend
 --------
-* Jade - Templating Engine
-* jQuery - JavaScript library
+* [Jade](http://jade-lang.com/) - Templating Engine
+* [jQuery](http://jquery.com/) - JavaScript library
 
 Other
 -----
-* Socket.io - Real Time Data w/ Web Sockets
-* Twitter Streaming API
+* [Socket.io](http://socket.io) - Real Time Data w/ Web Sockets
+* [Twitter Streaming API](https://dev.twitter.com/docs/streaming-apis)
 
 HOW DO I RUN IT?
 ==================
