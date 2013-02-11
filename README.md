@@ -53,6 +53,7 @@ TO DO:
 2. General clean up
 3. Need to use some templates for the front end (maybe Mustache??)
 4. Create data mining part of the app
+5. Use ntwitter package instead of manual https request (allows for easy OAuth)
 
 MIT License
 -----------
