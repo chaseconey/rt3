@@ -32,10 +32,8 @@ db.open(function(err) {
 /**
  * Get twitter config
  */
-var twitter_options = require('./configs/twitter_options');
+var twitter_options = require('./configs/my_twitter_options');
 
-
-console.log(twitter_options);
 /**
  * Make the request and do something with the response
  */

@@ -1,3 +1,7 @@
+USAGE
+=====
+Make a copy of the twitter_options as "my_twitter_options", and fill in your login credentials and change whatever other settings you would like (such as the track keyword)
+
 
 MIT License
 ===========
