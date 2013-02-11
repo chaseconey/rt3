@@ -4,7 +4,7 @@
 WHAT DOES IT DO?
 ================
 
-This is a simple application that grabs tweets from the Twitter Streaming API (https://dev.twitter.com/docs/streaming-apis) using a keyword that you specify and then stores the information in a database for later data mining.
+This is a simple application that grabs tweets from the [Twitter Streaming API] (https://dev.twitter.com/docs/streaming-apis) using a keyword that you specify and then stores the information in a database for later data mining.
 
 As you connect to the root route, the 10 latest tweets will be loaded onto the page. Once your browser has connected to the backend web socket, it will then also update with the latest tweets of that keyword.
 
