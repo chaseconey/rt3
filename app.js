@@ -20,26 +20,6 @@ var db = require('./configs/db');
  */
 var twitter_options = require('./configs/my_twitter_options');
 
-/**
- * Make the request and do something with the response
- */
-var twitter_request = https.request(twitter_options, function(res) {
-  var body = '';
-
-  res.on("data", function(chunk) {
-    var tweet = JSON.parse(chunk);
-    // db.insert(tweet, function() {
-    //   console.log("Tweet added");
-    // });
-  });
-
-  res.on("end", function() {
-    console.log("Disconnected");
-  });
-});
-
-twitter_request.end();
-
 var app = express();
 
 app.configure(function(){
@@ -61,6 +41,31 @@ app.configure('development', function(){
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+io = require('socket.io').listen(server);
+
+/**
+ * Make the request and do something with the response
+ */
+var twitter_request = https.request(twitter_options, function(res) {
+  var body = '';
+  res.on("data", function(chunk) {
+    var tweet = JSON.parse(chunk);
+    /**
+     * Send our tweet to the loaded page
+     */
+    io.sockets.emit("tweet", tweet);
+    
+    db.insert(tweet, function() {
+      console.log("Tweet added");
+    });
+  });
+
+  res.on("end", function() {
+    console.log("Disconnected");
+  });
+});
+twitter_request.end();
