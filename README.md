@@ -32,8 +32,8 @@ HOW DOES I RUN IT?
 ==================
 
 1. Download the app
-2. cd rt3 && npm install
-3. Rename /configs/*twitter_options.js* to *my_twitter_options.js* and fill in your own twitter credentials and change the track=bieber to whatever keyword you would like to collect
+2. <pre>cd rt3 && npm install</pre>
+3. Rename /configs/twitter_options.js to my_twitter_options.js and fill in your own twitter credentials and change the track=bieber to whatever keyword you would like to collect
 4. Start mongodb locally
     <pre>mongod</pre>
 5. Start the node server
