@@ -42,11 +42,7 @@ HOW DO I RUN IT?
 
 5. Start the node server
 
-    <pre>npm start</pre>
-    
-or
-
-    <pre>node app.js</pre>
+    <pre>npm start</pre> or <pre>node app.js</pre>
 
 6. Load page at localhost:3000 (or whatever port you chose)
 
