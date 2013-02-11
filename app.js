@@ -60,7 +60,7 @@ var twitter_request = https.request(twitter_options, function(res) {
     io.sockets.emit("tweet", tweet);
     
     db.insert(tweet, function() {
-      console.log("Tweet added");
+      //
     });
   });
 

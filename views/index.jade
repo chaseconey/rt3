@@ -4,16 +4,15 @@ block content
     h1= title
     ul#tweets
         each tweet in tweets
-            li= tweet.text
+            li
+                img(src='#{tweet.user.profile_image_url}')
+                p= tweet.user.name + " - " + tweet.text
     h3 Hi THAR
     script(src='/socket.io/socket.io.js')
     script
         var ul = $("#tweets");
         var socket = io.connect('http://localhost');
         socket.on('tweet', function (tweet) {
-            var tweetHtml = $("<li></li>", {
-                    text: tweet.text
-                }
-            );
+            tweetHtml = "<li><img src='" + tweet.user.profile_image_url + "'/><p>" + tweet.user.name + " - " + tweet.text + "</p></li>";
             ul.prepend(tweetHtml);
         });
