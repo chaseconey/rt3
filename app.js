@@ -8,6 +8,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , https = require('https')
+  , twitter = require('ntwitter')
   , path = require('path');
 
 /**
@@ -18,7 +19,7 @@ var db = require('./configs/db');
 /**
  * Get twitter config
  */
-var twitter_options = require('./configs/my_twitter_options');
+var twitter_config = require('./configs/my_twitter_config');
 
 var app = express();
 
@@ -50,27 +51,28 @@ io = require('socket.io').listen(server);
 /**
  * Make the request and do something with the response
  */
-var twitter_request = https.request(twitter_options, function(res) {
-  var body = '';
-  res.on("data", function(chunk) {
-    var tweet = JSON.parse(chunk);
+
+var twit = new twitter({
+  consumer_key: twitter_config.consumer_key,
+  consumer_secret: twitter_config.consumer_secret,
+  access_token_key: twitter_config.access_token_key,
+  access_token_secret: twitter_config.access_token_secret
+});
+
+twit.stream('statuses/filter', { track: 'bieber' }, function(stream) {
+  stream.on('data', function (tweet) {
     /**
      * Send our tweet to the loaded page
      */
-    io.sockets.volatile.emit("tweet", {
+    io.sockets.volatile.emit('tweet', {
       // Only send what the front end cares about
       user_name: tweet.user.name,
       tweet_text: tweet.text,
       profile_url: tweet.user.profile_image_url
     });
-    
+
     db.insert(tweet, function() {
       //
     });
   });
-
-  res.on("end", function() {
-    console.log("Disconnected");
-  });
 });
-twitter_request.end();
