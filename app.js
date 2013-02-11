@@ -57,7 +57,12 @@ var twitter_request = https.request(twitter_options, function(res) {
     /**
      * Send our tweet to the loaded page
      */
-    io.sockets.emit("tweet", tweet);
+    io.sockets.volatile.emit("tweet", {
+      // Only send what the front end cares about
+      user_name: tweet.user.name,
+      tweet_text: tweet.text,
+      profile_url: tweet.user.profile_image_url
+    });
     
     db.insert(tweet, function() {
       //

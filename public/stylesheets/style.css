@@ -6,3 +6,36 @@ body {
 a {
   color: #00B7FF;
 }
+
+ul#tweets {
+	width: 450px;
+}
+ul#tweets li {
+	list-style-type: none;
+	border-bottom: 1px solid black;
+}
+ul#tweets li img {
+	float: left;
+	clear: right;
+	width: 50px;
+	margin-right: 5px;
+}
+div#counter p {
+	position: absolute;
+	top: 100px;
+	right: 250px;
+	font-size: 60px;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+.cf {
+    *zoom: 1;
+}

@@ -8,10 +8,11 @@ var db = require(__dirname + '/../configs/db');
 exports.index = function(req, res){
   db.find({}, {"limit": 10, "sort": { "id": -1} }).toArray(function(err, tweets) {
     if(err) throw err;
-
+    console.log(tweets);
     res.render('index', {
-        title: 'Tweets',
-        tweets: tweets
+        title: 'rt3',
+        tweets: tweets,
+        count: tweets.length
     });
   });
 };

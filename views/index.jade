@@ -2,17 +2,36 @@ extends layout
 
 block content
     h1= title
+    button#connect Connect to Socket
+    button#disconnect Disconnect from Socket
+
+    #counter
+        p
+            span#numTweets= count
+            span  tweets
     ul#tweets
         each tweet in tweets
-            li
+            li.cf
                 img(src='#{tweet.user.profile_image_url}')
                 p= tweet.user.name + " - " + tweet.text
-    h3 Hi THAR
+
     script(src='/socket.io/socket.io.js')
     script
         var ul = $("#tweets");
         var socket = io.connect('http://localhost');
-        socket.on('tweet', function (tweet) {
-            tweetHtml = "<li><img src='" + tweet.user.profile_image_url + "'/><p>" + tweet.user.name + " - " + tweet.text + "</p></li>";
-            ul.prepend(tweetHtml);
+        var counter = $("div#counter").find("span#numTweets");
+        jQuery(function ($) {
+            socket.on('tweet', function (tweet) {
+                counterInt = parseInt(counter.html(), 10);
+                counter.html(counterInt+1)
+                tweetHtml = "<li class='cf'><img src='" + tweet.profile_url + "'/><p>" + tweet.user_name + " - " + tweet.tweet_text + "</p></li>";
+                ul.prepend(tweetHtml);
+            });
+        });
+        $("#connect").on("click", function(e) {
+            socket.socket.reconnect()
+        });
+        $("#disconnect").on("click", function(e) {
+            e.preventDefault();
+            socket.disconnect();
         });
