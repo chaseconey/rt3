@@ -12,6 +12,15 @@ a {
   color: #00B7FF;
 }
 
+nav a{
+    padding-right: 5px;
+}
+
+div#chart {
+    width: 500px;
+    height: 400px;
+}
+
 ul#tweets {
 	width: 450px;
 }
