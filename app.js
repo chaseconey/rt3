@@ -4,8 +4,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
+  , main = require('./routes/main')
+  , group = require('./routes/group')
   , http = require('http')
   , https = require('https')
   , twitter = require('ntwitter')
@@ -39,8 +39,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', main.index);
+app.get('/group', group.index);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
@@ -62,6 +62,12 @@ var twit = new twitter({
 twit.stream('statuses/filter', { track: twitter_config.track }, function(stream) {
   stream.on('data', function (tweet) {
     /**
+     * Add extra fields to the db here
+     */
+    tweet.created = new Date();
+
+
+    /**
      * Send our tweet to the loaded page
      */
     io.sockets.volatile.emit('tweet', {
@@ -70,7 +76,7 @@ twit.stream('statuses/filter', { track: twitter_config.track }, function(stream)
       tweet_text: tweet.text,
       profile_url: tweet.user.profile_image_url
     });
-    
+
     db.insert(tweet, function() {
       //
     });
