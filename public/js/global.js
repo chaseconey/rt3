@@ -1,16 +1,3 @@
-$(document).ready(function() {
-    initClick();
-});
-
-function initClick() {
-        $("#connect").on("click", function(e) {
-        socket.socket.reconnect();
-    });
-    $("#disconnect").on("click", function(e) {
-        socket.disconnect();
-    });
-}
-
 function convertDate(date) {
     var parts = date.split("/");
 

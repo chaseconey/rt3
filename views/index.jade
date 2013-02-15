@@ -1,35 +1,19 @@
 extends layout
 
 block content
-    h1= title
-    button#connect Connect to Socket
-    button#disconnect Disconnect from Socket
 
-    #counter
-        p
-            span#numTweets= count
-            span  tweets
-    ul#tweets
-        each tweet in tweets
-            li.cf
-                img(src='#{tweet.user.profile_image_url}')
-                p= tweet.user.name + " - " + tweet.text
+    #tweetContainer
+        h2 Active Tweets
+        ul#tweets
+            each tweet in tweets
+                li.cf
+                    img(src='#{tweet.user.profile_image_url}')
+                    p= tweet.user.name + " - " + tweet.text
+    #charts
+        h2 Last 10 Minutes
+        #realtime.chart
+        h2 Last 7 Days
+        #ajax.chart
 
-    script(src='/socket.io/socket.io.js')
-    script
-        var ul = $("ul#tweets"),
-            socket = io.connect('http://localhost'),
-            counter = $("div#counter").find("span#numTweets"),
-            initCounter = $("div#counter").find("span#numTweets").html(),
-            currentList;
-
-        jQuery(function ($) {
-            socket.on('tweet', function (tweet) {
-                initCounter++;
-                counter.html(initCounter)
-                tweetHtml = "<li class='cf'><img src='" + tweet.profile_url + "'/><p>" + tweet.user_name + " - " + tweet.tweet_text + "</p></li>";
-                ul.prepend(tweetHtml);
-
-                if (initCounter > 8) ul.children("li").last().remove();
-            });
-        });
+    script(src="/js/flot/jquery.flot.js")
+    script(src='/js/index.js')
