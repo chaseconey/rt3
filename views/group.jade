@@ -1,0 +1,43 @@
+extends layout
+
+block content
+    h1= title
+    #chart.chart
+
+    p= JSON.stringify(results)
+
+    script(src="/js/flot/jquery.flot.js")
+    script(src="/js/group.js")
+    script
+        $(document).ready(function() {
+            var data = [],
+            d,
+            results = !{JSON.stringify(results)};
+
+            //format the data into a data array
+            for(i in results) {
+                d = convertDate(results[i].date);
+                data.push( [parseInt(d.getTime()), results[i].sum] );
+            }
+            
+            options = {
+                series: {
+                    lines: { show: true },
+                    points: { show: true }
+                },
+                color: '#00d6e2',
+                yaxis: {
+                    mode: "number",
+                    tickSize: 1000
+                },
+                xaxis:
+                {
+                    mode: 'time',
+                    timeformat: "%y/%m/%d"
+                }
+            }
+            data = [ data ];
+            $.plot($("#chart"), data, options);
+        });   
+
+  
