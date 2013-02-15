@@ -57,7 +57,8 @@ var twit = new twitter({
   consumer_secret: twitter_config.consumer_secret,
   access_token_key: twitter_config.access_token_key,
   access_token_secret: twitter_config.access_token_secret
-});
+}),
+  tweetCount = 0;
 
 twit.stream('statuses/filter', { track: twitter_config.track }, function(stream) {
   stream.on('data', function (tweet) {
@@ -66,7 +67,7 @@ twit.stream('statuses/filter', { track: twitter_config.track }, function(stream)
      */
     tweet.created = new Date();
 
-
+    tweetCount++;
     /**
      * Send our tweet to the loaded page
      */
@@ -81,4 +82,10 @@ twit.stream('statuses/filter', { track: twitter_config.track }, function(stream)
       //
     });
   });
+  setInterval(function() {
+    io.sockets.emit("tweetCountUpdate", {
+      tweetCount: tweetCount
+    });
+    tweetCount = 0;
+  }, 60 * 1000);
 });

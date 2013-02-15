@@ -17,8 +17,8 @@ nav a{
 }
 
 div.chart {
-    width: 500px;
-    height: 400px;
+    width: 400px;
+    height: 250px;
     position: relative;
     padding: 0px;
 }

@@ -6,7 +6,6 @@ var model = require(__dirname + '/../models');
 
 exports.index = function(req, res){
 	model.getTweetCount(7, function(err, results) {
-        console.log(results);
         res.render("group",{
             results: results,
             title: "Charts n Stuff"

@@ -33,9 +33,3 @@ block content
                 if (initCounter > 8) ul.children("li").last().remove();
             });
         });
-        $("#connect").on("click", function(e) {
-            socket.socket.reconnect()
-        });
-        $("#disconnect").on("click", function(e) {
-            socket.disconnect();
-        });

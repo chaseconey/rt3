@@ -32,4 +32,18 @@ var getTweetCount = function(numDays, callback) {
     );
 };
 
+var getAllTweets = function(callback) {
+    var thisDate,
+        dateVal,
+        now = new Date(),
+        daysAgo = new Date();
+        
+    daysAgo.setDate(now.getDate() - 2);
+    /**
+     * Good example: http://stackoverflow.com/questions/3428246/executing-mongodb-query-in-node-js
+     */
+    db.find({"created": {"$gte": daysAgo}}, callback);
+};
+
 exports.getTweetCount = getTweetCount;
+exports.getAllTweets = getAllTweets;

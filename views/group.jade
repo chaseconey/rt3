@@ -2,7 +2,10 @@ extends layout
 
 block content
     h1= title
+    h2 Last 7 Days
     #chart.chart
+    h2 Last 10 Minutes
+    #realtime.chart
 
     script(src="/js/flot/jquery.flot.js")
     script(src="/js/group.js")
@@ -31,12 +34,14 @@ block content
                 xaxis:
                 {
                     mode: 'time',
-                    timeformat: "%y/%m/%d"
+                    timeformat: "%m/%d"
                 }
             }
             data = [ data ];
             console.log(data);
             $.plot($("#chart"), data, options);
-        });   
+        });
+
+        
 
   
