@@ -6,4 +6,5 @@ var db_host = "127.0.0.1",
   db_conn = new mongo.Db(db_db, new mongo.Server(db_host, db_port, {auto_reconnect: true})),
   db = db_conn.collection("tweets");
 
-module.exports = db;
+exports.db_conn = db_conn;
+exports.db = db;

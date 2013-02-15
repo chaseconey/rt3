@@ -5,7 +5,6 @@
 
 var express = require('express')
   , main = require('./routes/main')
-  , group = require('./routes/group')
   , tweets = require('./routes/tweets')
   , http = require('http')
   , https = require('https')
@@ -42,7 +41,7 @@ app.configure('development', function(){
 
 app.get('/', main.index);
 app.get('/tweets/count', tweets.count);
-app.get('/group', group.index);
+app.get('/tweets/hashtags', tweets.hashtags);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
@@ -79,8 +78,7 @@ twit.stream('statuses/filter', { track: twitter_config.track }, function(stream)
       tweet_text: tweet.text,
       profile_url: tweet.user.profile_image_url
     });
-
-    db.insert(tweet, function() {
+    db.db.insert(tweet, function() {
       //
     });
   });

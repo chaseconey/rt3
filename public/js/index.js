@@ -46,16 +46,17 @@ function initClick() {
 
     //Update the tweets real time
     var ul = $("ul#tweets"),
-        counter = $("div#counter").find("span#numTweets"),
-        initCounter = $("div#counter").find("span#numTweets").html();
+        counter = ul.find("li").length;
 
     socket.on('tweet', function (tweet) {
-        initCounter++;
-        counter.html(initCounter),
         tweetHtml = "<li class='cf'><img src='" + tweet.profile_url + "'/><p>" + tweet.user_name + " - " + tweet.tweet_text + "</p></li>";
         ul.prepend(tweetHtml);
 
-        if (initCounter > 8) ul.children("li").last().remove();
+        if (counter > 8) {
+            ul.children("li").last().remove();
+        } else {
+            counter++;
+        }
     });
 })();
 

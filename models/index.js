@@ -10,7 +10,7 @@ var getTweetCount = function(numDays, callback) {
     /**
      * Good example: http://stackoverflow.com/questions/3428246/executing-mongodb-query-in-node-js
      */
-    db.group(
+    db.db.group(
         //fields to group on (doesn't have to be a function)
         function(doc) {
             thisDate = doc.created;
@@ -39,11 +39,29 @@ var getAllTweets = function(callback) {
         daysAgo = new Date();
         
     daysAgo.setDate(now.getDate() - 2);
-    /**
-     * Good example: http://stackoverflow.com/questions/3428246/executing-mongodb-query-in-node-js
-     */
-    db.find({"created": {"$gte": daysAgo}}, callback);
+    db.db.find({"created": {"$gte": daysAgo}}, callback);
+};
+
+/**
+ * Count the number of distinct hashtags over a certain time period (in days).
+ * Uses the new aggregation functionality in mongo 2.2
+ */
+var getTweetHashtags = function(numDays, callback) {
+    var thisDate,
+        dateVal,
+        now = new Date(),
+        daysAgo = new Date();
+        
+    daysAgo.setDate(now.getDate() - numDays);
+    db.db.aggregate(
+        { $project :
+            { text : 1, tags : 1 }
+        },
+        { $unwind : "$tags" },
+        callback
+    );
 };
 
 exports.getTweetCount = getTweetCount;
 exports.getAllTweets = getAllTweets;
+exports.getTweetHashtags = getTweetHashtags;
