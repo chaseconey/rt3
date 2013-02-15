@@ -6,6 +6,7 @@
 var express = require('express')
   , main = require('./routes/main')
   , group = require('./routes/group')
+  , tweets = require('./routes/tweets')
   , http = require('http')
   , https = require('https')
   , twitter = require('ntwitter')
@@ -40,6 +41,7 @@ app.configure('development', function(){
 });
 
 app.get('/', main.index);
+app.get('/tweets/count', tweets.count);
 app.get('/group', group.index);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
