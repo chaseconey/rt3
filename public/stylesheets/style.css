@@ -16,9 +16,11 @@ nav a{
     padding-right: 5px;
 }
 
-div#chart {
+div.chart {
     width: 500px;
     height: 400px;
+    position: relative;
+    padding: 0px;
 }
 
 ul#tweets {
