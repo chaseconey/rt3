@@ -4,8 +4,6 @@ block content
     h1= title
     #chart.chart
 
-    p= JSON.stringify(results)
-
     script(src="/js/flot/jquery.flot.js")
     script(src="/js/group.js")
     script
@@ -37,6 +35,7 @@ block content
                 }
             }
             data = [ data ];
+            console.log(data);
             $.plot($("#chart"), data, options);
         });   
 
