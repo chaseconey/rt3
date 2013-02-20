@@ -48,10 +48,15 @@ function initClick() {
 
     //Update the tweets real time
     var ul = $("ul#tweets"),
-        counter = ul.find("li").length;
+        counter = ul.children("li").length;
 
     socket.on('tweet', function (tweet) {
-        tweetHtml = "<li class='cf'><img src='" + tweet.profile_url + "'/><p>" + tweet.user_name + " - " + tweet.tweet_text + "</p></li>";
+        tweetHtml += "<li><div class='media'>";
+        tweetHtml += "<img class='pull-left' src='" + tweet.profile_url + "'/>";
+        tweetHtml += "<div class='media-body'>";
+        tweetHtml += "<h4 class='media-heading'>" + tweet.user_name + "</h4>";
+        tweetHtml += "<div class='media'>" + tweet.tweet_text + "</div></div></li>";
+
         ul.prepend(tweetHtml);
 
         if (counter > 8) {

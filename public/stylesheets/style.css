@@ -1,13 +1,4 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  width: 100%;
-}
-
 h1 {
-	margin: 5px 0 0 10px;
   color: green;
 }
 
@@ -15,43 +6,29 @@ a {
   color: #00B7FF;
 }
 
-nav a{
-    padding-right: 5px;
-}
-
 /**
  * Chart Styling
  */
-div#charts {
-    position: absolute;
-    top: 75px;
-    right: 25px;
-}
 div.chart {
-    width: 400px;
-    height: 250px;
-    padding: 0px;
+    min-width: 300px;
+    min-height: 200px;
 }
 /**
  * Tweet Container Styling
  */
-div#tweetContainer {
-    position: absolute;
-    left: 25px;
-    top: 75px;
+ul#tweets .media {
+  margin-top: 1px;
 }
-ul#tweets {
-	width: 400px;
+ul#tweets h4.media {
+  margin-bottom: 10px;
 }
 ul#tweets li {
 	list-style-type: none;
-	border-bottom: 1px solid black;
   text-align: left;
+  margin-bottom: 1px;
+  border-bottom: 1px solid gray;
 }
 ul#tweets li img {
-	float: left;
-	clear: right;
-	width: 50px;
 	margin-right: 5px;
 }
 
@@ -60,7 +37,7 @@ ul#tweets li img {
  */
 #tagCloud {
   width:290px; background-color:#575454; text-align:center; padding:5px;
-  overflow:auto; font-size:70%; font-family:arial; margin: auto; margin-top: 50px;
+  overflow:auto; font-size:70%; font-family:arial;
 }  
 #tagCloud h2 {
   color:#ffffff; font-size:2.5em; margin:0 0 10px 0;
@@ -72,19 +49,3 @@ ul#tweets li img {
 }  
 #tagList li a { text-decoration:none; color:#ffffff; }
 #tagList li a:hover ( text-decoration:underline; }
-
-/**
- * Functions Area
- */
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.cf:after {
-    clear: both;
-}
-.cf {
-    *zoom: 1;
-}
