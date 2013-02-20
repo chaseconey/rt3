@@ -1,9 +1,11 @@
 $(document).ready(function() {
     getChartData();
+    getHashtagData();
 
     //Refresh chart every hour
     setInterval(function() {
         getChartData();
+        getHashtagData();
     }, 60 * 60 * 1000);
 });
 
@@ -98,4 +100,28 @@ function plotField(results) {
     //Data must be formatted this way
     data = [ data ];
     $.plot($("#ajax"), data, options);
+}
+
+function getHashtagData() {
+    var url = '/tweets/hashtags';
+    $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'json'
+    }).done(insertHashtags);
+}
+
+function insertHashtags(results) {
+    var ul = $("ul#tagList"),
+        li;
+    for(var i in results) {
+        li = $("<li>");
+        li.text(results[i]._id);
+        li.css("fontSize", (results[i].count / 10 < 1) ? results[i].count / 10 + 1 + "em": (results[i].count / 10 > 2) ? "2em" : results[i].count / 10 + "em");
+
+        //add to list
+        li.appendTo("#tagList");
+
+    }
+
 }

@@ -2,11 +2,13 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 h1 {
 	margin: 5px 0 0 10px;
-    color: green;
+  color: green;
 }
 
 a {
@@ -39,11 +41,12 @@ div#tweetContainer {
     top: 75px;
 }
 ul#tweets {
-	width: 450px;
+	width: 400px;
 }
 ul#tweets li {
 	list-style-type: none;
 	border-bottom: 1px solid black;
+  text-align: left;
 }
 ul#tweets li img {
 	float: left;
@@ -51,6 +54,24 @@ ul#tweets li img {
 	width: 50px;
 	margin-right: 5px;
 }
+
+/**
+ * Hashtag Container
+ */
+#tagCloud {
+  width:290px; background-color:#575454; text-align:center; padding:5px;
+  overflow:auto; font-size:70%; font-family:arial; margin: auto; margin-top: 50px;
+}  
+#tagCloud h2 {
+  color:#ffffff; font-size:2.5em; margin:0 0 10px 0;
+  background:url(/img/cloud.gif) no-repeat 0; padding:15px 0 15px 80px;
+}
+#tagList { margin:0; padding:0; }
+#tagList li {
+  list-style-type:none; float:left; margin:0 10px; height:35px; color:#ffffff;  
+}  
+#tagList li a { text-decoration:none; color:#ffffff; }
+#tagList li a:hover ( text-decoration:underline; }
 
 /**
  * Functions Area

@@ -9,7 +9,10 @@ block content
                 li.cf
                     img(src='#{tweet.user.profile_image_url}')
                     p= tweet.user.name + " - " + tweet.text
-    ul#hashtags
+
+    #tagCloud
+        h2 Popular Hashtags
+        ul#tagList
     #charts
         h2 Last 10 Minutes
         #realtime.chart

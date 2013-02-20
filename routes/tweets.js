@@ -12,7 +12,7 @@ exports.count = function(req, res){
 };
 
 exports.hashtags = function(req, res){
-    model.getTweetHashtags(7, function(err, results) {
+    model.getTweetHashtags(1, function(err, results) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify(results));
     });

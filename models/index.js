@@ -61,7 +61,8 @@ var getTweetHashtags = function(numDays, callback) {
         }},
         {$sort: {
             count: -1
-        }}
+        }},
+        {$limit: 20 }
     ],
     callback);
 };
