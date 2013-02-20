@@ -30,6 +30,7 @@ ul#tweets li {
 }
 ul#tweets li img {
 	margin-right: 5px;
+  max-width: 50px;
 }
 
 /**
