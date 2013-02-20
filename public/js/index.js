@@ -113,11 +113,14 @@ function getHashtagData() {
 
 function insertHashtags(results) {
     var ul = $("ul#tagList"),
-        li;
+        li,
+        count;
     for(var i in results) {
         li = $("<li>");
         li.text(results[i]._id);
-        li.css("fontSize", (results[i].count / 10 < 1) ? results[i].count / 10 + 1 + "em": (results[i].count / 10 > 2) ? "2em" : results[i].count / 10 + "em");
+
+        count = results[i].count;
+        li.css("fontSize", (count / 100 < 2) ? ((count / 100) + 1) + "em": "2em" );
 
         //add to list
         li.appendTo("#tagList");
