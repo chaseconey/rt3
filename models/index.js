@@ -7,29 +7,22 @@ var getTweetCount = function(numDays, callback) {
         daysAgo = new Date();
         
     daysAgo.setDate(now.getDate() - numDays);
-    /**
-     * Good example: http://stackoverflow.com/questions/3428246/executing-mongodb-query-in-node-js
-     */
-    db.db.group(
-        //fields to group on (doesn't have to be a function)
-        function(doc) {
-            thisDate = doc.created;
-            dateVal = thisDate.getFullYear() + "/" + parseInt(thisDate.getMonth()+1, 10) + "/" + thisDate.getDate();
-            return {"date": dateVal};
-        },
-        //condition
-        {"created": {"$gte" : daysAgo }},
-        //initial values used
-        {
-            sum: 0
-        },
-        //reduce function
-        function(doc, prev) { prev.sum += 1; },
-        //true for group all (always true)
-        true,
-        //results function
-        callback
-    );
+    
+    db.db.aggregate([
+        {$match: {
+            created: {"$gte": daysAgo}
+        }},
+        {$project: {
+            day_joined: {
+                $dayOfMonth: "$created"
+            }
+        }},
+        {$group: {
+            _id: "$day_joined",
+            count: {$sum: 1}
+        }}
+    ],
+    callback);
 };
 
 var getAllTweets = function(callback) {
@@ -53,13 +46,24 @@ var getTweetHashtags = function(numDays, callback) {
         daysAgo = new Date();
         
     daysAgo.setDate(now.getDate() - numDays);
-    db.db.aggregate(
-        { $project :
-            { text : 1, tags : 1 }
-        },
-        { $unwind : "$tags" },
-        callback
-    );
+
+    db.db.aggregate([
+        {$match: {
+            created: {"$gte": daysAgo}
+        }},
+        {$project: {
+            tags: "$entities.hashtags.text"
+        }},
+        {$unwind: "$tags"},
+        {$group: {
+            _id: "$tags",
+            count: {$sum: 1}
+        }},
+        {$sort: {
+            count: -1
+        }}
+    ],
+    callback);
 };
 
 exports.getTweetCount = getTweetCount;

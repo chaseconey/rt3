@@ -73,13 +73,11 @@ function getChartData(){
 }
 
 function plotField(results) {
-    var data = [],
-        d;
+    var data = [];
 
     //format the data into a data array
     for(var i in results) {
-        d = convertDate(results[i].date);
-        data.push( [parseInt(d.getTime(), 10), results[i].sum] );
+        data.push( [results[i]._id, results[i].count] );
     }
     //Set some options for the graph
     options = {
@@ -87,15 +85,14 @@ function plotField(results) {
             lines: { show: true },
             points: { show: true }
         },
+        hoverable: true,
         color: '#00d6e2',
         yaxis: {
             mode: "number",
             tickSize: 1000
         },
-        xaxis:
-        {
-            mode: 'time',
-            timeformat: "%m/%d"
+        xaxis: {
+            minTickSize: 1
         }
     };
     //Data must be formatted this way
