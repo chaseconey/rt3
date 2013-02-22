@@ -13,13 +13,47 @@ var getTweetCount = function(numDays, callback) {
             created: {"$gte": daysAgo}
         }},
         {$project: {
-            day_joined: {
+            dayCreated: {
                 $dayOfMonth: "$created"
             }
         }},
         {$group: {
-            _id: "$day_joined",
+            _id: "$dayCreated",
             count: {$sum: 1}
+        }}
+    ],
+    callback);
+};
+
+var getTweetCountByHour = function(numDays, callback) {
+    var thisDate,
+        dateVal,
+        now = new Date(),
+        daysAgo = new Date();
+        
+    daysAgo.setDate(now.getDate() - numDays);
+    
+    db.db.aggregate([
+        {$match: {
+            created: {"$gt": daysAgo}
+        }},
+        {$project: {
+            hourCreated: {
+                $hour: "$created"
+            },
+            dayCreated: {
+                $dayOfMonth: "$created"
+            }
+        }},
+        {$group: {
+            _id: {
+                day: "$dayCreated",
+                hour: "$hourCreated"
+            },
+            count: {$sum: 1}
+        }},
+        {$sort: {
+            _id: 1
         }}
     ],
     callback);
@@ -59,11 +93,12 @@ var getTweetHashtags = function(numDays, callback) {
             _id: "$tags",
             count: {$sum: 1}
         }},
-        {$limit: 20 }
+        {$limit: 40 }
     ],
     callback);
 };
 
 exports.getTweetCount = getTweetCount;
+exports.getTweetCountByhour = getTweetCountByHour;
 exports.getAllTweets = getAllTweets;
 exports.getTweetHashtags = getTweetHashtags;

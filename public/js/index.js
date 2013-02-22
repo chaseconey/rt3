@@ -70,24 +70,42 @@ function initClick() {
 })();
 
 /**
- * Updating the 7 day graph ajax functionality
+ * Updating the day graph ajax functionality
  */
 function getChartData(){
-    var url = '/tweets/count';
+    var url = '/tweets/countByHour/1';
     $.ajax({
         url: url,
         method: 'GET',
         dataType: 'json'
-    }).done(plotField);
+    }).done(plotHour);
+
+    url = '/tweets/countByDay/7';
+    $.ajax({
+        url: url,
+        method: 'GET',
+        dataType: 'json'
+    }).done(plotDays);
 }
 
-function plotField(results) {
-    var data = [];
+/**
+ * Helper function for interfacing between ajax call and function that builds chart. Need a callback
+ * to add the ID that the results are being sent to, that way we don't have to re-write the chart draw
+ */
+function plotDays(results) {
+    plotField(results, "sevenDays");
+}
 
-    //format the data into a data array
-    for(var i in results) {
-        data.push( [results[i]._id, results[i].count] );
-    }
+function plotHour(results) {
+    plotField(results, "oneDay");
+}
+
+function plotField(results, divId) {
+    var data = [],
+        ticks = [],
+        createTime,
+        i;
+
     //Set some options for the graph
     options = {
         series: {
@@ -104,9 +122,35 @@ function plotField(results) {
             minTickSize: 1
         }
     };
+    
+    //format the data into a data array
+    if(divId === "oneDay") {
+        for(i in results) {
+            data.push( [i, results[i].count] );
+            
+
+            createTime = results[i]._id.hour;
+
+            //Just so we can get real hours, let's convert to 12 hour instead of 24
+            if(createTime === 0) {
+                createTime = 12; //midnight is represented by 0
+            }
+            else if(createTime > 12) {
+                createTime = createTime - 12;
+            }
+            //The 6 is for timezone support
+            ticks.push([i, createTime]);
+        }
+        options.xaxis.ticks = ticks;
+    } else {
+        for(i in results) {
+            data.push( [results[i]._id, results[i].count] );
+        }
+    }
+    
     //Data must be formatted this way
     data = [ data ];
-    $.plot($("#ajax"), data, options);
+    $.plot($("#" + divId), data, options);
 }
 
 function getHashtagData() {

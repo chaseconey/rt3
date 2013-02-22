@@ -40,7 +40,8 @@ app.configure('development', function(){
 });
 
 app.get('/', main.index);
-app.get('/tweets/count', tweets.count);
+app.get('/tweets/countByDay/:numdays', tweets.countByDay);
+app.get('/tweets/countByHour/:numdays', tweets.countByHour);
 app.get('/tweets/hashtags', tweets.hashtags);
 
 var server = http.createServer(app).listen(app.get('port'), function(){
