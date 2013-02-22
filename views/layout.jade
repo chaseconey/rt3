@@ -9,8 +9,10 @@ html
     script(src="/js/global.js")
     script(src='/socket.io/socket.io.js')
   body
+    .navbar.navbar-inverse.navbar-fixed-top
+        .navbar-inner
+            a#title.brand(href="/") rt3
     .container-fluid
         .span12
-            h1.center= title
             .row-fluid
                 block content
