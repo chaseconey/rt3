@@ -122,6 +122,8 @@ function insertHashtags(results) {
     var ul = $("ul#tagList"),
         li,
         count;
+    //clear out list before re-creating
+    ul.empty();
     for(var i in results) {
         li = $("<li>");
         li.text(results[i]._id);
