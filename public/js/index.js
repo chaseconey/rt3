@@ -112,7 +112,10 @@ function plotField(results, divId) {
             lines: { show: true },
             points: { show: true }
         },
-        hoverable: true,
+        grid: {
+            hoverable: true,
+            clickable: true
+        },
         color: '#00d6e2',
         yaxis: {
             mode: "number",
