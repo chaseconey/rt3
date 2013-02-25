@@ -118,8 +118,7 @@ function plotField(results, divId) {
         },
         color: '#00d6e2',
         yaxis: {
-            mode: "number",
-            tickSize: 1000
+            mode: "number"
         },
         xaxis: {
             minTickSize: 1
@@ -145,6 +144,7 @@ function plotField(results, divId) {
             ticks.push([i, createTime]);
         }
         options.xaxis.ticks = ticks;
+
     } else {
         for(i in results) {
             data.push( [results[i]._id, results[i].count] );
